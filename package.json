@@ -1,7 +1,12 @@
 {
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index"
   },
+  "author": "gjkim <tbtbtb156@naver.com>",
+  "license": "ISC",
   "dependencies": {
     "puppeteer": "^21.6.1",
     "ts-node": "^10.9.2"
