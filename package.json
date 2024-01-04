@@ -8,6 +8,8 @@
   "author": "gjkim <tbtbtb156@naver.com>",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
+    "firebase": "^10.7.1",
     "puppeteer": "^21.6.1",
     "ts-node": "^10.9.2"
   },

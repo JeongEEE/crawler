@@ -1,5 +1,6 @@
 import * as puppeteer from 'puppeteer';
 import {Article} from './types';
+import {Database, db} from './firebase';
 
 export default class Crawler {
   async initBrowser() {
@@ -73,10 +74,24 @@ export default class Crawler {
   async start() {
     const browser = await this.initBrowser()
     const page = await browser.newPage()
+    const database = new Database(db)
 
     await page.goto('https://www.medium.com/tag/react/recommended')
     const articles = await this.getArticles(page)
     console.log(articles)
+
+    const results = await Promise.all(
+      articles.map(async article => {
+        const checkExist = await database.getData('articles', 'title', (article.title as string))
+
+        if(checkExist.length > 0) return null
+        else {
+          const doc = await database.addData('articles', article)
+          return doc.id
+        }
+      })
+    )
+    console.log(results)
 
     await browser.close()
   }
